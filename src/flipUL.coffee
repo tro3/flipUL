@@ -25,6 +25,7 @@ angular.module 'flipUL', [
     s.dynFilter = (x) ->
       resp = {}
       resp[s.attr] = x
+      resp
       
     s.add = (item) ->
       if item

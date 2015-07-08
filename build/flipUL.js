@@ -38,7 +38,8 @@
         s.dynFilter = function(x) {
           var resp;
           resp = {};
-          return resp[s.attr] = x;
+          resp[s.attr] = x;
+          return resp;
         };
         s.add = function(item) {
           if (item) {
