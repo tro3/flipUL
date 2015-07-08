@@ -1,7 +1,9 @@
 {
   "name": "flipUL",
   "dependencies": {
-    "angular": ""
+    "angular": "",
+    "bootstrap": "",
+    "angular-bootstrap": ""
   },
   "devDependencies": {
     "angular-mocks": ""

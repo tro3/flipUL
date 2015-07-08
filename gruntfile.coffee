@@ -46,16 +46,29 @@ module.exports = (grunt) ->
             options:
                 configFile: 'karma.conf.js'
             build: {}
+            monitor:
+                options:
+                    background: true
+                    singleRun: false
             compile:
                 options:
                     files: [
                       'bower_components/angular/angular.js',
                       'bower_components/angular-mocks/angular-mocks.js',
-                      'bower_components/marked/lib/marked.js',
                       'build/flipUL.min.js',
                       'src/**/*.spec.js',
                       'src/**/*.spec.coffee'
                     ]                       
+
+        monitor: # Renamed from watch  
+          src:
+            files: ['src/**/*.coffee', '!src/**/*.spec.coffee']
+            tasks: ['coffeelint', 'build', 'karma:monitor:run']  
+    
+          test:
+            files: ['src/**/*.spec.coffee']
+            tasks: ['karma:monitor:run']
+
     )
       
     grunt.loadNpmTasks('grunt-contrib-jshint')
@@ -65,11 +78,15 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks('grunt-contrib-clean')
     grunt.loadNpmTasks('grunt-ng-annotate')
     grunt.loadNpmTasks('grunt-contrib-uglify')
+    grunt.loadNpmTasks('grunt-contrib-watch')
     grunt.loadNpmTasks('grunt-karma')
     
+    grunt.renameTask('watch', 'monitor')
+    
+    grunt.registerTask('watch', ['karma:monitor:start', 'monitor'])        
     grunt.registerTask('check', ['jshint', 'coffeelint'])
     grunt.registerTask('build', ['coffee', 'concat', 'clean'])
     grunt.registerTask('compile', ['check', 'build', 'ngAnnotate', 'uglify', 'karma:compile'])
     
-    grunt.registerTask('default', ['check', 'build', 'karma:build'])
+    grunt.registerTask('default', ['check', 'build', 'karma:build', 'watch'])
 

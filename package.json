@@ -12,6 +12,7 @@
     "grunt-contrib-clean": "",
     "grunt-contrib-jshint": "",
     "grunt-contrib-uglify": "",
+    "grunt-contrib-watch": "",
     "grunt-karma": "",
     "karma": "",
     "karma-chai": "",

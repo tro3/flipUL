@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="example-app">
+  <head>
+    <meta charset="utf-8" />
+    <title>flipUL example</title>
+
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../build/flipUL.js"></script>
+
+  </head>
+  <body>
+
+
+    <div ng-controller="MainController">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>FlipUL</h1>
+                    <p>
+                      <button class="btn btn-default" ng-click="edit=!edit">{{edit?'Save':'Edit'}}</button>
+                    </p>
+                    
+                    <h4>My List:</h4>
+                    <ul flip-ul="list"
+                        attr="title"
+                        edit-mode="edit"
+                        choices="choices"
+                        on-add="onAdd(item)"
+                        on-remove="onRemove(item)"                        
+                        style="list-style: none"
+                    >
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </body>
+
+  <script>
+    var app = angular.module('example-app', ['ui.bootstrap', 'flipUL']);
+
+    app.controller('MainController', ['$scope', function($scope) {
+      $scope.choices = [
+        {id:1, title:"The Many Adventures of Fred"},
+        {id:2, title:"George Takes a Holiday"},
+        {id:3, title:"Bob Rules"},        
+      ];
+      $scope.list = [$scope.choices[1]];
+      $scope.edit = false;
+      $scope.onAdd = function(x){console.log('Added', x);};
+      $scope.onRemove = function(x){console.log('Removed', x);};
+      
+    }]);
+
+  </script>
+</html>
